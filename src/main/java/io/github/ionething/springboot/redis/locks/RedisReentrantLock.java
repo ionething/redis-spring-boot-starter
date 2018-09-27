@@ -18,6 +18,12 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.LockSupport;
 
+/**
+ *
+ * implement the DistReentrantLock interface
+ * @author Vincent
+ *
+ */
 @Slf4j
 @RequiredArgsConstructor
 public class RedisReentrantLock implements DistReentrantLock, AutoCloseable {

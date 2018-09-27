@@ -7,7 +7,7 @@ This is a simple spring boot starter to use Jedis.
 - [x] Auto configuration.
 - [x] JedisPool and RedisClient.
 - [x] Distributed re-entering lock - RedisReentrantLock.
-- [ ] Distributed limiting.
+- [x] Distributed limiting.
 
 ## Contact
 Github issues
@@ -19,7 +19,7 @@ Mail: vincent7xin@gmail.com
 compile and install:
 
 ```
-    mvn clean install
+mvn clean install
 ```
 
 maven dependency:

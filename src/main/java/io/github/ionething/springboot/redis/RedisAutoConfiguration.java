@@ -1,9 +1,11 @@
 package io.github.ionething.springboot.redis;
 
+import io.github.ionething.springboot.redis.limit.RedisLimit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -45,6 +47,12 @@ public class RedisAutoConfiguration {
     @ConditionalOnMissingBean(RedisClient.class)
     public RedisClient redisClient(@Autowired @Qualifier(value = "jedisPool") JedisPool jedisPool) {
         return new RedisClient(jedisPool);
+    }
+
+    @Bean
+    @ConditionalOnProperty(prefix = "redis.limit", name = "ignore", havingValue = "false", matchIfMissing = true)
+    public RedisLimit redisLimit(@Autowired @Qualifier(value = "jedisPool") JedisPool jedisPool) {
+        return redisLimit(jedisPool);
     }
 
 }
