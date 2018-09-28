@@ -21,7 +21,7 @@ public class RedisLimit {
 
     public boolean limit(String name, int permits) {
         try(Jedis jedis = jedisPool.getResource()) {
-            String result = (String) jedis.eval(limitScript, Collections.singletonList(LIMIT_PREFIX + name), Collections.singletonList(String.valueOf(permits)));
+            String result = jedis.eval(limitScript, Collections.singletonList(LIMIT_PREFIX + name), Collections.singletonList(String.valueOf(permits))).toString();
             if (FAiLURE_CODE.equals(result)) {
                 return false;
             } else {
@@ -32,14 +32,14 @@ public class RedisLimit {
     }
 
     private static final String limitScript = "" +
-            "local key = KEYS[1]" +
-            "local permits = tonumber(ARGV[1])" +
-            "local current = tonumber(redis.call('get', key) or '0')" +
-            "if current + 1 > permits then " +
-            "return 0;" +
-            "else" +
-            "redis.call('INCRBY', key, 1)" +
-            "redis.call('EXPIRE', key, 3)" +
-            "return current + 1" +
-            "end";
+            "local key = KEYS[1]\n" +
+            "local permits = tonumber(ARGV[1])\n" +
+            "local current = tonumber(redis.call('get', key) or '0')\n" +
+            "if current + 1 > permits then\n" +
+            "return 0\n" +
+            "else\n" +
+            "redis.call('INCRBY', key, 1)\n" +
+            "redis.call('EXPIRE', key, 30)\n" +
+            "return current + 1\n" +
+            "end\n";
 }

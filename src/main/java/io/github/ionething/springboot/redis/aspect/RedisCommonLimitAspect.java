@@ -27,6 +27,7 @@ public class RedisCommonLimitAspect {
 
     @Before("pointcut()")
     public void doBefore(JoinPoint joinPoint) throws Exception {
+        System.out.println("jinru");
 
         if (redisLimit != null) {
             MethodSignature signature = (MethodSignature) joinPoint.getSignature();

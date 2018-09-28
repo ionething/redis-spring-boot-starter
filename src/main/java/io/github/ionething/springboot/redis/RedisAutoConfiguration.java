@@ -52,7 +52,7 @@ public class RedisAutoConfiguration {
     @Bean
     @ConditionalOnProperty(prefix = "redis.limit", name = "ignore", havingValue = "false", matchIfMissing = true)
     public RedisLimit redisLimit(@Autowired @Qualifier(value = "jedisPool") JedisPool jedisPool) {
-        return redisLimit(jedisPool);
+        return new RedisLimit(jedisPool);
     }
 
 }

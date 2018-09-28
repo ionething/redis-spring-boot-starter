@@ -7,7 +7,7 @@ import java.lang.annotation.*;
 @Documented
 public @interface RedisCommonLimit {
 
-    String name();
+    String name() default "";
 
     /**
      *
