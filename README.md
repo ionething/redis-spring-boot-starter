@@ -65,7 +65,20 @@ maven dependency:
 
 ### Limiting
 
-doing
+```java
+    @RedisCommonLimit(name = "login", permits = 500)
+    public void login() {
+        // do something
+    }
+```
+
+If you do not want to use limiting, you can config it.
+
+```
+redis.limit.ignore=true
+```
+
+Default, false if you do not figure it out.
 
 
 ## Spring Boot Properties
@@ -80,6 +93,7 @@ redis.pool.maxIdle: 8
 redis.pool.minIdle: 0
 redis.pool.maxActive: 8
 redis.pool.maxWait: -1ms
+redis.limit.ignore=false
 ```
  
 ## TODO
