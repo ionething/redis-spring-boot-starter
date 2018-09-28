@@ -85,14 +85,14 @@ Default, false if you do not figure it out.
 application.properties
 
 ```
-redis.host: 127.0.0.1
-redis.port: 6379
-redis.password: 
-redis.ssl: false
-redis.pool.maxIdle: 8
-redis.pool.minIdle: 0
-redis.pool.maxActive: 8
-redis.pool.maxWait: -1ms
+redis.host=127.0.0.1
+redis.port=6379
+redis.password=  
+redis.ssl=false
+redis.pool.maxIdle=8
+redis.pool.minIdle=0
+redis.pool.maxActive=8
+redis.pool.maxWait=-1ms
 redis.limit.ignore=false
 ```
  
