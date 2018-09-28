@@ -1,3 +1,4 @@
 # Auto Configure
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-io.github.ionething.springboot.redis.RedisAutoConfiguration
+io.github.ionething.springboot.redis.RedisAutoConfiguration,\
+io.github.ionething.springboot.redis.limit.RedisLimitAutoConfiguration

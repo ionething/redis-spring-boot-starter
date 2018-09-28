@@ -28,7 +28,6 @@ public class RedisLimit {
                 return true;
             }
         }
-
     }
 
     private static final String limitScript = "" +
@@ -39,7 +38,7 @@ public class RedisLimit {
             "return 0\n" +
             "else\n" +
             "redis.call('INCRBY', key, 1)\n" +
-            "redis.call('EXPIRE', key, 30)\n" +
+            "redis.call('EXPIRE', key, 3)\n" +
             "return current + 1\n" +
             "end\n";
 }
