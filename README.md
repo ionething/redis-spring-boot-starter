@@ -99,5 +99,8 @@ redis.limit.ignore=false
 ## TODO
 - support redis cluster.
 
+## Tips
+- [Redisson](https://github.com/redisson/redisson) is a better choice if you use redis in your app in product environment.
+
 ## custom spring boot starter
 [spring boot docs](https://docs.spring.io/spring-boot/docs/2.0.5.RELEASE/reference/htmlsingle/#boot-features-custom-starter)
