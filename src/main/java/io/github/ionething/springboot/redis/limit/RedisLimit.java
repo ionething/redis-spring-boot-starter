@@ -6,7 +6,10 @@ import lombok.extern.slf4j.Slf4j;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -19,9 +22,11 @@ public class RedisLimit {
     @NonNull
     private JedisPool jedisPool;
 
-    public boolean limit(String name, int permits) {
+    public boolean limit(String name, int permits, int seconds) {
         try(Jedis jedis = jedisPool.getResource()) {
-            String result = jedis.eval(limitScript, Collections.singletonList(LIMIT_PREFIX + name), Collections.singletonList(String.valueOf(permits))).toString();
+            List<String> keys = Collections.singletonList(LIMIT_PREFIX + name);
+            List<String> args = Arrays.asList(new String[]{String.valueOf(permits), String.valueOf(seconds)});
+            String result = jedis.eval(limitScript, keys, args).toString();
             if (FAiLURE_CODE.equals(result)) {
                 return false;
             } else {
@@ -38,7 +43,7 @@ public class RedisLimit {
             "return 0\n" +
             "else\n" +
             "redis.call('INCRBY', key, 1)\n" +
-            "redis.call('EXPIRE', key, 3)\n" +
+            "redis.call('EXPIRE', key, ARGV[2])\n" +
             "return current + 1\n" +
             "end\n";
 }

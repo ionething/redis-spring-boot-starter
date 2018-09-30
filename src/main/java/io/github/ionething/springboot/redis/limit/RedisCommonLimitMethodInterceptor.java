@@ -24,7 +24,7 @@ public class RedisCommonLimitMethodInterceptor implements MethodInterceptor {
                 if (StringUtils.isEmpty(name)) {
                     name = invocation.getMethod().getName();
                 }
-                boolean pass = redisLimit.limit(name, redisCommonLimit.permits());
+                boolean pass = redisLimit.limit(name, redisCommonLimit.permits(), redisCommonLimit.seconds());
                 if (!pass) {
                     throw new OverLimitException("the total number of invoking this method is over the limit");
                 }
