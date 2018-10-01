@@ -17,7 +17,7 @@ public class RedisLimit {
 
     private static final String LIMIT_PREFIX = "limit:";
 
-    private static final String FAiLURE_CODE = "0";
+    private static final String FAILURE_CODE = "0";
 
     @NonNull
     private JedisPool jedisPool;
@@ -27,7 +27,7 @@ public class RedisLimit {
             List<String> keys = Collections.singletonList(LIMIT_PREFIX + name);
             List<String> args = Arrays.asList(new String[]{String.valueOf(permits), String.valueOf(seconds)});
             String result = jedis.eval(limitScript, keys, args).toString();
-            if (FAiLURE_CODE.equals(result)) {
+            if (FAILURE_CODE.equals(result)) {
                 return false;
             } else {
                 return true;
